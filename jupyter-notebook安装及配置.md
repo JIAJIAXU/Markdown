@@ -29,6 +29,7 @@ jupyter nbextensions_configurator enable --user
 在安装python程序包的过程中如果出现错误，大概有3个原因：
 * 安装包名字拼错
 * 安装包与python版本不一致，请使用wheel包安装[pythonlibs][5]
+* 网络不稳定，如有必要则翻墙重新安装
 
   [1]: https://github.com/dunovank/jupyter-themes
   [2]: https://github.com/transcranial/jupyter-themer
