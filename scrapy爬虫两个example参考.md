@@ -1,6 +1,6 @@
 ---
 title: scrapy爬虫两个example参考
-tags: python，scrapy
+tags: python, scrapy
 grammar_cjkRuby: true
 ---
 
