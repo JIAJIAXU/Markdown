@@ -65,15 +65,15 @@ class UA(CrawlSpider):
 ```python
 # -*- coding: utf-8 -*-
 # import scrapy
-from scrapy.spiders import CrawlSpider, Rule
-from scrapy.linkextractors import LinkExtractor
+from scrapy.spiders import CrawlSpider  # , Rule
+# from scrapy.linkextractors import LinkExtractor
 from scrapy.http import Request
-from user_agent.items import UserAgentItem
+from mobie_ua1.items import MobieUa1Item
 import urllib
 
 
 class UA(CrawlSpider):
-    name = 'muser_agent'  # 此处name必须与项目名字一致
+    name = 'mobie_ua1'  # 此处name必须与项目名字一致
     allowed_domians = ['fynas.com']
     # start_urls = ['http://movie.douban.com/top250']
     # # headers = {
@@ -85,26 +85,49 @@ class UA(CrawlSpider):
         yield Request("http://www.fynas.com/ua/search?b=&k=", headers={'User_Agent': 'Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'})
 
     def parse(self, response):
-        next_page = response.xpath(
-            '//*[contains(@class,"paginationControl")]/a[11]//@href').extract()
+        up_page = response.xpath(  # xpath返回的是一个[]字符串数组
+            '//*[contains(@class,"paginationControl")]/a[1]/text()').extract()
+
+        if '上页' in up_page[0]:  # < 上页
+            next_page = response.xpath(
+                '//*[contains(@class,"paginationControl")]/a[11]//@href').extract()
+        else:
+            next_page = response.xpath(
+                '//*[contains(@class,"paginationControl")]/a[10]//@href').extract()
         for url in next_page:
             yield Request(urllib.parse.urljoin(response.url, url))
 
         selector_items = response.xpath(
             # '//div[@class="item"]')
-            '/html/body/div[2]/table/tbody/tr[position()>1]')
+            '//table[@class="table table-bordered"]/tr[position()>1]')  # 下面xpath的根路径
         for item in selector_items:
             yield self.parse_item(item, response)
 
-    def parse_item(self, response):
-        MUA = UserAgentItem()
-        MUA['equipment'] = response.xpath(
-            '/html/body/div[2]/table/tbody/tr[2]/td[1]/text()').extract()
-        MUA['system'] = response.xpath(
-            '/html/body/div[2]/table/tbody/tr[2]/td[2]/text()').extract()
-        MUA['browser'] = response.xpath(
-            '/html/body/div[2]/table/tbody/tr[2]/td[3]/text()').extract()
-        MUA['ua'] = response.xpath(
-            '/html/body/div[2]/table/tbody/tr[3]/td[4]/text()').extract()
+# 抓取每个index页上的表格信息
+
+    def parse_item(self, selector, response):
+        MUA = MobieUa1Item()
+        MUA['equipment'] = selector.xpath(  # 此处的xpath使用.//开头，表示的是相对于上面的xpath('//table[@class="table table-bordered"]/tr[position()>1]')开始匹配
+            './/td[1]/a/text()').extract()
+        MUA['system'] = selector.xpath(
+            './/td[2]/text()').extract()
+        MUA['browser'] = selector.xpath(
+            './/td[3]/text()').extract()
+        MUA['ua'] = selector.xpath(
+            './/td[4]/text()').extract()
+        print(response.request.headers['User-Agent'])
         return MUA
+```
+**注意：**xpath返回的是[]字符串元组，对其进行操作或比较时，要指定索引位置如：
+```python
+if '上页' in up_page[0]
+```
+如果写成
+```python
+if '上页' in up_page
+# 就会报错
+```
+另外scrapy抓取的结果最后是返回到一个列表里（list）如：
+```python
+movie={'title':[''], 'star':[''], 'ranking':['']}
 ```
