@@ -63,10 +63,13 @@ class DoubanMovieTop250Spider(CrawlSpider):
         #     movie['title'] = [t1]
         # else:
         #     movie['title'] = title2
+        # t = selector.xpath(
+        # './/*[@class="pl2"]/a/text()').extract()[0].replace('/', '').strip()
+        # 将xpath获取的标题有tuple转为字符串，再将字符串末尾中的'/'替换为空格，最后使用strip函数去掉字符串首尾的空格和换行符
         t = selector.xpath(
-            './/*[@class="pl2"]/a/text()').extract()[0].replace('/', '').strip()
-		# 将xpath获取的标题有tuple转为字符串，再将字符串末尾中的'/'替换为空格，最后使用strip函数去掉字符串首尾的空格和换行符
-        movie['title'] = [t]  # 将处理好的字符转换成tuple赋值给movie['title']
+            './/*[@class="pl2"]/a/text()').extract()[0]
+        movie['title'] = re.findall(r'\w+', t)
+        # 将处理好的字符转换成tuple赋值给movie['title']
         # movie['title'] = selector.xpath(
         #     './/*[@class="pl2"]/a/text()').extract()[0]  # .replace('/', '').strip()
         movie['star'] = selector.xpath(
@@ -74,10 +77,10 @@ class DoubanMovieTop250Spider(CrawlSpider):
         num1 = selector.xpath(
             './/span[@class="pl"]/text()').extract()[0]
         num2 = re.findall(r"\d+", num1)  # 正则xpath提取的评分人数，只获取数值
-        movie['score']=num2
-	  #  for _, num in enumerate(num2):
-       #   num = num.group()
-        #  movie['score'] = [str(num)]
+        movie['score'] = num2
+        # for _, num in enumerate(num2):
+        #     num = num.group()
+        #     movie['score'] = [str(num)]
         # movie['score']= selector.xpath(
         #     './/span[@class="pl"]/text()').extract()
         return movie
