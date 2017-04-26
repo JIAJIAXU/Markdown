@@ -73,10 +73,11 @@ class DoubanMovieTop250Spider(CrawlSpider):
             './/*[@class="rating_nums"]/text()').extract()
         num1 = selector.xpath(
             './/span[@class="pl"]/text()').extract()[0]
-        num2 = re.finditer(r"\d+", num1)  # 正则xpath提取的评分人数，只获取数值
-        for _, num in enumerate(num2):
-            num = num.group()
-            movie['score'] = [str(num)]
+        num2 = re.findall(r"\d+", num1)  # 正则xpath提取的评分人数，只获取数值
+        movie['score']=num2
+	  #  for _, num in enumerate(num2):
+       #   num = num.group()
+        #  movie['score'] = [str(num)]
         # movie['score']= selector.xpath(
         #     './/span[@class="pl"]/text()').extract()
         return movie
