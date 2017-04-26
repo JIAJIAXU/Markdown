@@ -5,7 +5,7 @@ grammar_cjkRuby: true
 ---
 
 
-## 修改了豆瓣电影的名字以及利用正则表达式只留下评分人数中的数字
+### 修改了豆瓣电影的名字个数以及利用正则表达式只留下评分人数中的数字
 ```python 
 # -*- coding: utf-8 -*-
 # import scrapy
