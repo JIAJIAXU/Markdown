@@ -14,7 +14,7 @@ grammar_cjkRuby: true
   * ```babun update```(用于判断是否有新的更新包)
 ### 2、babun常用插件的安装和配置
 * ```oh-my-zsh```的配置：babun内置使用bash，zsh，默认为zsh，并且安装了```oh-my-zsh```主题，[相应的主题样式可以去github上预览][2]，大众比较喜欢的是ys和agnoster主题，其中agnoster使用powerline样式
-![agnoster主题样式][3]
+							![agnoster主题样式][3]
 可以修改C:/user/username/下的.zsrc文件，更换主题，如```ZSH_THEME='ys',
 ZSH_THEME='random'```
 * powerline字体的安装：在babun中如果要使用powerline样式，则必须使用相应的[powerline字体][4]，windows下powerline字体文件必须放到```C:\Windows\Fonts\```文件夹下，然后在babun中鼠标右键点击右上方，选择设置->text，修改字体
