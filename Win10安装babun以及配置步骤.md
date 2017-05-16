@@ -54,6 +54,8 @@ fi
 	* 修改```.zshrc```文件，设置```ZSH_THEME="powerlevel9k/powerlevel9k"```
 
 
+**注：.oh-my-zsh主题的设置，互相有冲突，```oh-my-zsh、powerline-shell、Powerlevel9k```这三个主题选择一个使用**
+
   [1]: http://babun.github.io/
   [2]: https://github.com/robbyrussell/oh-my-zsh
   [3]: ./images/1494909340817.jpg
