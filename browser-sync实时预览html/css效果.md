@@ -49,7 +49,11 @@ browser-sync start --proxy "主机名" "css/*.css"
 **一点建议**
 我们建议您结合gulp或grunt来使用，我们这里有详细说明Gulp文档、Grunt文档。如果您还没有使用gulp或grunt，那么可以通过以上方式创建Browsersync
 ### 3、在sublime text 3中通过插件browser-sync实时预览html
+除了上面使用nodejs安装的browser-sync来实时预览html之外，__sublime中的browser-sync插件也能实时预览，而且安装使用起来非常方便__
+直接通过package control 安装就行，然后在顶部工具栏打开browser-sync就可以了
 ### 4、webstorm实时预览html（LiveEdit）
+webstorm自带的LiveEdit模式也能实时预览html，具体使用步骤请参考百度搜索结果。[LiveEdit设置步骤][2]
 
 
   [1]: https://www.npmjs.com/get-npm?utm_source=house&utm_medium=homepage&utm_campaign=free%20orgs&utm_term=Install%20npm
+  [2]: https://jingyan.baidu.com/article/454316ab68ac03f7a7c03ae3.html
