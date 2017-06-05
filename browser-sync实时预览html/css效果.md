@@ -53,7 +53,8 @@ browser-sync start --proxy "主机名" "css/*.css"
 直接通过package control 安装就行，然后在顶部工具栏打开browser-sync就可以了
 ### 4、webstorm实时预览html（LiveEdit）
 webstorm自带的LiveEdit模式也能实时预览html，具体使用步骤请参考百度搜索结果。[LiveEdit设置步骤][2]
-
+### 5、atom使用browser-plus插件
+### 6、visualstudio code直接预览
 
   [1]: https://www.npmjs.com/get-npm?utm_source=house&utm_medium=homepage&utm_campaign=free%20orgs&utm_term=Install%20npm
   [2]: https://jingyan.baidu.com/article/454316ab68ac03f7a7c03ae3.html
