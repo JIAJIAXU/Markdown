@@ -6,7 +6,7 @@ grammar_cjkRuby: true
 
 
 ## 实战1——pyspider爬取豆瓣电影top250（使用翻页操作）
-```python
+```python?linenums
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
 # Created on 2017-03-23 20:42:41
@@ -55,7 +55,7 @@ class Handler(BaseHandler):
         }
 ```
 ## 实战2——pyspider爬取豆瓣电影top250（生成起始请求url列表）
-```python
+```python?linenums
 from pyspider.libs.base_handler import *
 # import re
 
@@ -92,7 +92,7 @@ class Handler(BaseHandler):
         }
 ```
 ## 实战3——pyspider爬取豆瓣电影（翻页操作+多级网页爬取）
-```python
+```python?linenums
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
 # Created on 2017-04-26 10:42:01
@@ -146,7 +146,7 @@ class Handler(BaseHandler):
         }
 ```
 ## 实战4——pyspider爬取所有豆瓣书籍（翻页操作+多级网页爬取+上级页面元素传递到下级页面）
-```python
+```python?linenums
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
 # Created on 2017-04-25 19:48:12
