@@ -5,7 +5,7 @@ grammar_cjkRuby: true
 ---
 
 ## requests爬取豆瓣电影
-```python
+```python?linenums
 import requests
 from lxml import etree
 from urllib.parse import urljoin
@@ -52,7 +52,7 @@ start_url = "http://movie.douban.com/top250"
 douban(start_url)
 ```
 ## requests爬取图片
-```python
+```python?linenums
 import requests
 import re
 
@@ -81,4 +81,4 @@ def Spider(url):
     else:
         return
     Spider(nextPage)
-	```
+```
