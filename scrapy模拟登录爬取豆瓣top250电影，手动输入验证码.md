@@ -5,7 +5,7 @@ grammar_cjkRuby: true
 ---
 
 
-```python
+```python?linenums
 # -*- coding: utf-8 -*-
 # import scrapy
 from scrapy.spiders import CrawlSpider
