@@ -17,7 +17,7 @@ import urllib
 
 
 class DoubanMovieTop250Spider(CrawlSpider):
-    name = 'douban_top_movie'  
+    name = 'douban_top_movie'  # 此处name必须与settings中的BOT_NAME一致
     allowed_domians = ['douban.com']
     # start_urls = ['http://movie.douban.com/top250']
     # # headers = {
@@ -35,8 +35,10 @@ class DoubanMovieTop250Spider(CrawlSpider):
     def parse(self, response):
         next_page = response.xpath(
             '//*[contains(@class,"next")]//@href').extract()
-        for url in next_page:
-            yield Request(urllib.parse.urljoin(response.url, url))
+        # for url in next_page:
+        #     yield Request(urllib.parse.urljoin(response.url, url))
+        if next_page:  # 两种翻页方式，最合理的做法是判断下一页是否为空
+            yield Request(urllib.parse.urljoin(response.url, next_page[0]))
         # parse也是parse中Request的默认回调函数
         # parse是默认的start_requests/start_url的回调（callback）函数
         # 使用urllib的方法将下一页的相对链接转为绝对链接与使用scrapy自带的response.urljoin()的作用一样
@@ -45,7 +47,6 @@ class DoubanMovieTop250Spider(CrawlSpider):
             # if next is not None:
             # next = response.urljoin(next)
             # yield Request(next,callback=self.parse)
-			# 如果知道所有的页数，也可以在start_url中建立所有的url列表
         selector_item = response.xpath(
             '//*[contains(@class,"hd")]//@href').extract()
         for url in selector_item:
@@ -53,6 +54,7 @@ class DoubanMovieTop250Spider(CrawlSpider):
         # for url in selector_item:
         #   url = response.urljoin(url)
         #   yield Request(url,callback = self.parse_item)
+        #   yield response.follow(url,callback=self.parse_item)
 
     def parse_item(self, response):
         movie = DoubanTopMovieItem()
@@ -102,7 +104,7 @@ class DoubanMovieTop250Spider(CrawlSpider):
     def parse_item(self, selector, response):
         movie = doubanmovie()
         movie['title'] = selector.xpath(
-            './/*[@class="title"]/text()').extract()[0]
+            './/*[@class="title"]/text()').extract()[0]  # 最安全的做法是使用extract_first()
         movie['star'] = selector.xpath(
             './/*[@class="rating_num"]/text()').extract()
         movie['score'] = selector.xpath(
