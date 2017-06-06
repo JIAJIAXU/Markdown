@@ -81,7 +81,7 @@ import urllib
 
 
 class DoubanMovieTop250Spider(CrawlSpider):
-    name = 'douban_movie'  # 此处name必须与项目名字一致
+    name = 'douban_movie'  # 此处name必须与settings中的BOT_NAME一致
     allowed_domians = ['douban.com']
 
     def start_requests(self):
