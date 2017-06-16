@@ -14,7 +14,7 @@ grammar_cjkRuby: true
   * ```babun update```(用于判断是否有新的更新包)
 ### 2、babun常用插件的安装和配置
 * ```oh-my-zsh```的配置：babun内置使用bash，zsh，默认为zsh，并且安装了```oh-my-zsh```主题，[相应的主题样式可以去github上预览][2]，大众比较喜欢的是ys和agnoster主题，其中agnoster使用powerline样式
-							![agnoster主题样式][3]
+![agnoster主题样式][3]
 可以修改C:/user/username/下的.zsrc文件，更换主题，如```ZSH_THEME='ys',
 ZSH_THEME='random'```
 * powerline字体的安装：在babun中如果要使用powerline样式，则必须使用相应的[powerline字体][4]，windows下powerline字体文件必须放到```C:\Windows\Fonts\```文件夹下，然后在babun中鼠标右键点击右上方，选择设置->text，修改字体
@@ -52,6 +52,23 @@ fi
 	* ```cd ~/.oh-my-zsh/custom/themes```，进入.oh-my-zsh/custom/themes文件夹
 	* ```git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k```，git clone相应程序包
 	* 修改```.zshrc```文件，设置```ZSH_THEME="powerlevel9k/powerlevel9k"```
+### 3.配置vim（windows下pathogen的安装）
+* 1、vim插件管理（）：__pathogen__ 安装
+* *  在babun命令行中执行"mkdir -p ~/.vim/autoload ~/.vim/bundle && \
+curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim"
+* *  在"C:\USER\USERNAME"文件夹下打开babun,使用vim新建".vimrc"文件，添加
+```
+call pathogen#infect()  
+syntax on  
+filetype plugin indent on
+set nu
+set background=dark
+colorscheme onedark
+```
+* 2、在~/.vim/bundle文件夹下打开babun，输入命令"git clone http://github.com/scrooloose/nerdtree.git"，安装插件
+
+
+
 
 
 **注：.oh-my-zsh主题的设置，互相有冲突，```oh-my-zsh、powerline-shell、Powerlevel9k```这三个主题选择一个使用**
